@@ -10,14 +10,14 @@ class Square2 {
     // Method for comparing two squares
     @Override
     public boolean equals(Object sq) {
-    	// can i cast safely?
-    	if (! (sq instanceof Square2)) {
+    	if (sq instanceof Square2) {
+	    	// do the cast
+	    	Square2 sq2 = (Square2) sq;
+	    	// compare content
+	    	return side == sq2.side;
+    	} else {
     		return false;
     	}
-    	// do the cast
-    	Square2 sq2 = (Square2) sq;
-    	// compare content
-    	return side == sq2.side;
     }
 }
 
