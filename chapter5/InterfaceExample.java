@@ -4,6 +4,8 @@ abstract class CompanyBase {
 	abstract public String name();
 	abstract public float revenue();
 	abstract public float profit();
+	
+	
 }
 
 //Limited Liability Company (dt. GmbH)
