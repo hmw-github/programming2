@@ -1,24 +1,18 @@
 package programming2.chapter6;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
-class NameComparator implements Comparator<Student> {
-	@Override
-	public int compare(Student s1, Student s2) {
-		return s1.getName().compareTo(s2.getName());
-	}
-}
-
-public class ManageStudentsWithList {
-    private List<Student> studentList = new LinkedList<Student>();
+public class ManageStudentsWithMap {
+    private Map<Integer, Student> studentList = new HashMap<>();
     private Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-    	ManageStudentsWithList management = new ManageStudentsWithList();
+    	ManageStudentsWithMap management = new ManageStudentsWithMap();
         management.run();
     }
 
@@ -75,9 +69,20 @@ public class ManageStudentsWithList {
         System.out.print("Enter your choice: ");
     }
 
+    /**
+     * Output student list ordered by matriculation number ascending
+     */
     private void listStudents() {
-    	for (int i = 0; i < studentList.size(); ++i) {
-    		System.out.printf("%d. %s%n", i + 1, studentList.get(i));
+    	int i = 1;
+    	
+    	List<Integer> matriculationNumbers = new ArrayList<>();
+    	for (Integer nr : studentList.keySet()) {
+    		matriculationNumbers.add(nr);
+    	}
+    	Collections.sort(matriculationNumbers);
+    	
+    	for (int nr : matriculationNumbers) {
+        	System.out.printf("%d. %s%n", i++, studentList.get(nr));    		
     	}
     }
 
@@ -96,9 +101,8 @@ public class ManageStudentsWithList {
     		System.out.println("Error: matriculation number already exists!");
     	} else {
         	Student newStudent = new Student(name, matriculationNumber);
-        	studentList.add(newStudent);
+        	studentList.put(matriculationNumber, newStudent);
     	}
-    	
     }
 
     /**
@@ -106,17 +110,7 @@ public class ManageStudentsWithList {
      * If the matriculation number is not found, null is returned.
      */
     private Student search(int matriculationNumber) {
-    	Student found = null;
-
-    	for (int i = 0; i < studentList.size(); ++i) {
-    		Student student = studentList.get(i);
-    		
-    		if (student.getMatriculationNumber() == matriculationNumber) {
-    			found = student;
-    			break;
-    		}
-    	}
-    	return found;
+    	return studentList.get(matriculationNumber);
     }
     
     /**
@@ -147,7 +141,7 @@ public class ManageStudentsWithList {
     	Student found = search(matriculationNumber);
     	
     	if (found != null) {
-    		studentList.remove(found);
+    		studentList.remove(found.getMatriculationNumber());
     		System.out.println("deleted: " + found);
     	} else {
     		System.out.println("matriculation number not found!");
@@ -155,14 +149,7 @@ public class ManageStudentsWithList {
     }
 
     private void sortStudents() {
-    	int choice = 1; // or let user make a choice!
-    	
-    	if (choice == 1) 
-    		Collections.sort(studentList);
-    	// sort by name
-    	else if (choice == 2)
-    		Collections.sort(studentList, new NameComparator());
-    	//Collections.sort(studentList, (s1, s2) -> s1.getName().compareTo(s2.getName()));
+    	System.out.println("Not supported!");
     }
 
     private void generateSampleStudents() {
@@ -171,7 +158,7 @@ public class ManageStudentsWithList {
             String name = "Student" + (i + 1);
             int matriculationNumber = 100000 + i;
             Student student = new Student(name, matriculationNumber);
-            studentList.add(student);
+            studentList.put(matriculationNumber, student);
         }
         System.out.println("50,000 sample students generated.");
     }
