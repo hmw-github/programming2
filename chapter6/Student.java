@@ -1,6 +1,6 @@
 package programming2.chapter6;
 
-class Student implements Comparable<Student> {
+public class Student implements Comparable<Student> {
     private String name;
     private int matriculationNumber;
 
