@@ -22,20 +22,27 @@ public class Library {
 		
 		for (int i = 0; i < booksInit.length; ++i) {
 			if (i >= maxSize) {
-				// falls Index ungültig, aufhören
+				// stop on invalid index
 				break;
 			}
 			books[i] = booksInit[i];
 		}
 	}
 	
+	/**
+	 * Stores b at index pos if the position is empty
+	 */
 	public void insertBook(Book b, int pos) {
-		if (pos >= books.length) {
+		if (pos >= books.length || books[pos] != null) {
 			return;
 		}
+		
 		books[pos] = b;
 	}
 
+	/**
+	 * Returns all the books with the given title.
+	 */
 	public Book[] searchByTitle(String title) {
 		Book[] result;
 		
@@ -59,7 +66,10 @@ public class Library {
 		
 		return result;
 	}
-	
+
+	/**
+	 * Returns the number of books with the given author.
+	 */
 	public int countBooksByAuthor(String author) {
 		int count = 0;
 		
@@ -72,15 +82,17 @@ public class Library {
 		return count;		
 	}
 	
-	// Nicht gefordert, aber hilfreich für LibraryBookManager.main()
+	// Not required, but helpful for LibraryBookManager.main()
+	/**
+	 * Returns all books matching searchTerm
+	 */
 	public Book[] getBooksBySearchTerm(String searchTerm) {
 		int hits = 0;
 		
 		// first search to find out size of array
 		for (Book b : books) {
 			if (b != null 
-					&& (b.getAuthor().contains(searchTerm) 
-					|| b.getTitle().contains(searchTerm))) {
+				&& (b.getAuthor().contains(searchTerm) || b.getTitle().contains(searchTerm))) {
 				hits++;
 			}
 		}
