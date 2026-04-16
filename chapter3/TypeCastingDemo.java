@@ -62,7 +62,8 @@ public class TypeCastingDemo {
         Animal plainAnimal = new Animal();
 
         // This would compile but crash at runtime:
-        // Dog wrongDog = (Dog) plainAnimal;
+        Dog wrongDog = (Dog) plainAnimal;
+        wrongDog.fetch();
 
         // =========================
         // 6. Safe Downcasting using instanceof

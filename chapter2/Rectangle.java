@@ -53,7 +53,7 @@ public class Rectangle {
         }
      
         // compare contents
-        if (r1.equals(r2)) {
+        if (r1.equals("aaa")) {
         	System.out.println("Contents are equal!");
         } else {
         	System.out.println("Contents are NOT equal!");        	
