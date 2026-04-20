@@ -1,23 +1,27 @@
 package chapter3;
 
-public final class FinalDemo {
+public final class FinalDemo { // cannot be specialized
 
-    private final String owner;
+	// readonly after initialization 
+    private final String owner; 
     private int counter = 0;
 
     public FinalDemo(final String owner) {
         this.owner = owner;
     }
 
+    // cannot be redefined in a subclass
     public final String getOwner() {
         return owner;
     }
 
-    public void addItem(String item) {
+    public void addItem(final String item) {
         counter++;
+        // item = "aaa"; not possible
     }
 
     public void demonstrateLocalFinal() {
+    	// readonly after initialization
         final int maxRetries = 5;
 
         for (int i = 0; i < maxRetries; i++) {
