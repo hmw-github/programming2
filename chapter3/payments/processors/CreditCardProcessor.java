@@ -1,4 +1,4 @@
-package chapter3.paymentexercise.processors;
+package chapter3.payments.processors;
 
 import java.time.Year;
 
