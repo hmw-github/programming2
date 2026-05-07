@@ -29,7 +29,7 @@ public class MapDemo {
 		 */
 		
 		// is FDP present?
-		if (
+		if (opinionPoll.get("FDP") == null) {
 			System.out.println("not found!");
 		} else {
 			System.out.println("FDP: " + opinionPoll.get("FDP"));			
