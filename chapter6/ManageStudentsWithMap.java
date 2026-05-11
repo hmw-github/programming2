@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Please note: we are the Student class from "ManageStudentWithList"
+ * Please note: we are using the Student class from "ManageStudentWithList"
  * - hashCode is defined using the attributes
  * - equals has been overidden
  */
