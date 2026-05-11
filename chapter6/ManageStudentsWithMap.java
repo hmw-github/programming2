@@ -1,64 +1,22 @@
 package chapter6;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
-class StudentComparator implements Comparator<Student> {
-	public int compare(Student s1, Student s2) {
-		return s1.getMatriculationNumber() - s2.getMatriculationNumber();
-	}
-}
-
-class Student {
-	private String name;
-	private int matriculationNumber;
-	
-	public Student(String name, int matriculationNumber) {
-		this.name = name;
-		this.matriculationNumber = matriculationNumber;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getMatriculationNumber() {
-		return matriculationNumber;
-	}
-	public void setMatriculationNumber(int matriculationNumber) {
-		this.matriculationNumber = matriculationNumber;
-	}
-	@Override
-	public String toString() {
-		return "Student [name=" + name + ", matriculationNumber=" + matriculationNumber + "]";
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(name, matriculationNumber);
-	}
-	@Override
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof Student)) {
-			return false;
-		}
-		
-		Student otherStudent = (Student) other;
-		return Objects.equals(name,  otherStudent.name) && matriculationNumber == otherStudent.matriculationNumber;
-	}
-}
-
-public class ManageStudentsWithList {
+/**
+ * Please note: we are the Student class from "ManageStudentWithList"
+ * - hashCode is defined using the attributes
+ * - equals has been overidden
+ */
+public class ManageStudentsWithMap {
     private List<Student> studentList = new LinkedList<>();
     private Scanner scanner = new Scanner(System.in);
     private long startTime;
 
     public static void main(String[] args) {
-    	ManageStudentsWithList management = new ManageStudentsWithList();
+    	ManageStudentsWithMap management = new ManageStudentsWithMap();
         management.run();
     }
 
@@ -127,6 +85,7 @@ public class ManageStudentsWithList {
     	String name = scanner.nextLine();
     	System.out.print("Matriculation number: ");
     	int nr = scanner.nextInt();
+    	
     	startTime = System.currentTimeMillis();
     	Student newStudent = new Student(name, nr);
     	studentList.add(newStudent);
