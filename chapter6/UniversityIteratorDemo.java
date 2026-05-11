@@ -2,7 +2,10 @@ package chapter6;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 class UniversityStudent {
@@ -41,18 +44,84 @@ class UniversityStudent {
 }
 
 enum StudentSortMethods {
-	SORT_NAME, SORT_STUDENT_NUMBER 
+	SORT_NAME, SORT_STUDENT_NUMBER
 }
 
-class University {
+class NameComparator implements Comparator<UniversityStudent> {
+	@Override
+	public int compare(UniversityStudent s1, UniversityStudent s2) {
+		return s1.getName().compareTo(s2.getName());
+	}	
+}
+
+class NrComparator implements Comparator<UniversityStudent> {
+	@Override
+	public int compare(UniversityStudent s1, UniversityStudent s2) {
+		return s1.getMatriculationNumber() - s2.getMatriculationNumber();
+	}	
+}
+
+class UniversityIterator implements Iterator<UniversityStudent> {
+	private List<UniversityStudent> list;
+	private int index;
+	
+	public UniversityIterator(List<UniversityStudent> originalList, String filter, 
+			StudentSortMethods sortMethod) {
+		this.list = new LinkedList<>();
+		index = 0;
+		
+		// copy original list to list and apply filter
+		for (UniversityStudent s : originalList) {
+			if (filter.isEmpty() || s.getStudyProgramme().equals(filter)) {
+				list.add(s);
+			}
+		}
+		
+		// sort list
+		if (sortMethod == StudentSortMethods.SORT_NAME) {
+			Collections.sort(list, new NameComparator());
+		} else if (sortMethod == StudentSortMethods.SORT_STUDENT_NUMBER) {
+			Collections.sort(list, new NrComparator());			
+		}
+	}
+	
+	@Override
+	public boolean hasNext() {
+		return index < list.size();
+	}
+
+	@Override
+	public UniversityStudent next() {
+		if (!hasNext()) {
+			throw new RuntimeException("List already iterated!");
+		}
+		return list.get(index++);
+	}
+	
+}
+
+class University implements Iterable<UniversityStudent> {
 	private String name;
 	private List<UniversityStudent> students = new ArrayList<>();
+	private String filter = "";
+	private StudentSortMethods sortMethod = StudentSortMethods.SORT_STUDENT_NUMBER;
 	
 	public University(String name, List<UniversityStudent> students) {
 		this.name = name;
 		this.students = students;
 	}
 	
+	public Iterator<UniversityStudent> iterator() {
+		return new UniversityIterator(students, filter, sortMethod);
+	}
+
+	public void setFilter(String filter) {
+		this.filter = filter;
+	}
+
+	public void setSortMethod(StudentSortMethods sortMethod) {
+		this.sortMethod = sortMethod;
+	}
 }
 
 public class UniversityIteratorDemo {
@@ -63,7 +132,7 @@ public class UniversityIteratorDemo {
 				new UniversityStudent("Paul", 1111, "Computer Science")
 		);
 		University uni = new University("THI", students);
-		for (Student s : uni) {
+		for (UniversityStudent s : uni) {
 			System.out.println(s);
 		}
 		// or: using the iterator directly
@@ -78,7 +147,7 @@ public class UniversityIteratorDemo {
 		uni.setFilter("Computer Science");
 		uni.setSortMethod(StudentSortMethods.SORT_NAME);
 		// uni.setSortMethod(StudentSortMethods.SORT_STUDENT_NUMBER);
-		for (Student s : uni) {
+		for (UniversityStudent s : uni) {
 			System.out.println(s);
 		}		
 	}
