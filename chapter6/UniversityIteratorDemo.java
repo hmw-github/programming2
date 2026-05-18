@@ -136,6 +136,7 @@ public class UniversityIteratorDemo {
 			System.out.println(s);
 		}
 		// or: using the iterator directly
+		System.out.println("---");
 		Iterator<UniversityStudent> iter = uni.iterator();
 		while (iter.hasNext()) {
 			System.out.println(iter.next());			
@@ -144,7 +145,8 @@ public class UniversityIteratorDemo {
 		/**
 		 * exension: filter by study programme, sort by name or nr
 		 */
-		uni.setFilter("Computer Science");
+		System.out.println("---");
+		uni.setFilter("Business");
 		uni.setSortMethod(StudentSortMethods.SORT_NAME);
 		// uni.setSortMethod(StudentSortMethods.SORT_STUDENT_NUMBER);
 		for (UniversityStudent s : uni) {
