@@ -1,22 +1,22 @@
 package chapter8;
 
-interface Lampe {
+interface Lamp {
 	void setStatus(double value);
-	void setFarbe(int value);
+	void setColor(int value);
 }
 
-interface Schalter {
+interface Switch {
 	double getStatus();
 }
 
-interface TemperaturSensor {
-	double getTemperatur();
+interface TemperatureSensor {
+	double getTemperature();
 }
 
-abstract class Geraet {
+abstract class Device {
 	private String name;
 	
-	public Geraet(String name) {
+	public Device(String name) {
 		this.name = name;
 	}
 	
@@ -24,25 +24,25 @@ abstract class Geraet {
 		return name;
 	}
 	
-	abstract public double[] getWerte();
+	abstract public double[] getValues();
 }
 
-class LampeMitSchalter extends Geraet implements Schalter, Lampe {
+class LampWithSwitch extends Device implements Switch, Lamp {
 	private double status;
-	private int farbe;
+	private int color;
 	
-	public LampeMitSchalter(String name, double status, int farbe) {
+	public LampWithSwitch(String name, double status, int color) {
 		super(name);
 		this.status = status;
-		this.farbe = farbe;
+		this.color = color;
 	}
 	
-	public int getFarbe() {
-		return farbe;
+	public int getColor() {
+		return color;
 	}
 	
-	public double[] getWerte() {
-		return new double[] { status, farbe };
+	public double[] getValues() {
+		return new double[] { status, color };
 	}
 
 	@Override
@@ -51,8 +51,8 @@ class LampeMitSchalter extends Geraet implements Schalter, Lampe {
 	}
 
 	@Override
-	public void setFarbe(int value) {
-		farbe = value;
+	public void setColor(int value) {
+		color = value;
 		
 	}
 
@@ -60,59 +60,75 @@ class LampeMitSchalter extends Geraet implements Schalter, Lampe {
 	public double getStatus() {
 		return status;
 	}
+
+	@Override
+	public String toString() {
+		return "LampWithSwitch [status=" + status + ", color=" 
+				+ Integer.toHexString(color) + ", name=" + getName() + "]";
+	}
 }
 
-class SmartGummiEnte extends LampeMitSchalter implements TemperaturSensor {
-	private double temperatur;
+class SmartRubberDuck extends LampWithSwitch implements TemperatureSensor {
+	private double temperature;
 	
-	public SmartGummiEnte() {
-		this("Ente", 0.0, 0x000000, 0.0);
+	public SmartRubberDuck() {
+		this("Duck", 0.0, 0x000000, 0.0);
 	}
 	
-	public SmartGummiEnte(String name, double status, int farbe, double temperatur) {
-		super(name, status, farbe);
-		this.temperatur = temperatur;
+	public SmartRubberDuck(String name, double status, int color, double temperature) {
+		super(name, status, color);
+		this.temperature = temperature;
 	}
 
-	public double[] getWerte() {
-		double[] werte = super.getWerte();
-		return new double[] { werte[0], werte[1], temperatur };
+	public double[] getValues() {
+		double[] values = super.getValues();
+		return new double[] { values[0], values[1], temperature };
 	}
 
 	@Override
-	public double getTemperatur() {
-		return temperatur;
-	}	
+	public double getTemperature() {
+		return temperature;
+	}
+
+	@Override
+	public String toString() {
+		return "SmartRubberDuck [temperature=" + temperature + ", toString()=" + super.toString() + "]";
+	}
+
 }
 
 public class Controller {
 
 	public static void main(String[] args) {
 		/*
-		SmartGummiEnte geraet1 = new SmartGummiEnte("Ente", 0.75, 0xFFFFFF, 28.0);
-		_______ geraet2 = new LampeMitSchalter("Tisch", 1, 0xFFFFFF);
-		_______ geraet3 = new LampeMitSchalter("Steh", 0.5, 0xFFFFFF);
-		_______ sensor = geraet1;
-		_______ geraeteListe1 = new _______ { geraet1, geraet2, geraet3 };
-		_______ geraeteListe2 = new _______ { geraet1, geraet2, geraet3 };
+		SmartRubberDuck device1 = new SmartRubberDuck("Duck", 0.75, 0xFFFFFF, 28.0);
+		_______ device2 = new LampWithSwitch("Table", 1, 0xFFFFFF);
+		_______ device3 = new LampWithSwitch("Stand", 0.5, 0xFFFFFF);
+		_______ sensor = device1;
+		_______ deviceList1 = new _______ { device1, device2, device3 };
+		_______ deviceList2 = new _______ { device1, device2, device3 };
 
-		// Ändere Farbe passend zur Temperatur
-		for(_______ g1 : geraeteListe1) {
-			if (sensor.getTemperatur() > 20.0) {
-				g1.setFarbe(0xFF0000); // rot
+		// Change colour to match the temperature
+		for(_______ g1 : deviceList1) {
+			if (sensor.getTemperature() > 20.0) {
+				g1.setColor(0xFF0000); // rot
 			} else {
-				g1.setFarbe(0x0000FF); // blau				
+				g1.setColor(0x0000FF); // blau				
 			}
 		}
 		
-		// Synchronisiere Lampenschaltung
+		// Synchronise the lamp circuit
 		double value = 0;
 		
-		for (_________ g2 : geraeteListe2) {
+		for (_______ g2 : deviceList2) {
 			value = Math.max(value, g2.getStatus());
 		}
-		for (_________ g3 : geraeteListe2) {
+		for (_______ g3 : deviceList2) {
 			g3.setStatus(value);
+		}
+		
+		for(Lamp l : deviceList1) {
+			System.out.println(l);
 		}
 		*/
 	}
