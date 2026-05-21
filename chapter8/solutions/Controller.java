@@ -42,6 +42,11 @@ class LampWithSwitch extends Device implements Switch, Lamp {
 	}
 	
 	public double[] getValues() {
+//		double[] result = new double[2];
+//		result[0] = status;
+//		result[1] = color;
+//		return result;
+		
 		return new double[] { status, color };
 	}
 
@@ -73,6 +78,9 @@ class SmartRubberDuck extends LampWithSwitch implements TemperatureSensor {
 	
 	public SmartRubberDuck() {
 		this("Duck", 0.0, 0x000000, 0.0);
+//		works, but violating DRY principle!		
+//		super("Duck", 0.0, 0x000000);
+//		this.temperature = 0.0;
 	}
 	
 	public SmartRubberDuck(String name, double status, int color, double temperature) {
@@ -81,6 +89,13 @@ class SmartRubberDuck extends LampWithSwitch implements TemperatureSensor {
 	}
 
 	public double[] getValues() {
+		// not using super.getValues() violates DRY!
+//		double[] result = new double[3];
+//		result[0] = getStatus();
+//		result[1] = getColor();
+//		result[2] = temperature;
+//		return result;
+		
 		double[] values = super.getValues();
 		return new double[] { values[0], values[1], temperature };
 	}
