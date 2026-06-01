@@ -49,20 +49,21 @@ public class EventHandling extends Application implements EventHandler<ActionEve
 		p.getChildren().add(okButton);
 
 		// Event handling for OK button
-		// okButton.setOnAction(new OKButtonEventHandler(nameTextField));
+		//okButton.setOnAction(new OKButtonEventHandler(nameTextField));
 
 		// or by using an anonymous class implementing the EventHandler interface:
-		okButton.setOnAction(this);
-		okButton.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				System.out.println("Button clicked, Name = " + nameTextField.getText());
-				System.out.println("it's your " + ++counter + ". click!");
-			}
-		});
+//		okButton.setOnAction(this);
+//		okButton.setOnAction(new EventHandler<ActionEvent>() {
+//			public void handle(ActionEvent event) {
+//				System.out.println("Button clicked, Name = " + nameTextField.getText());
+//				System.out.println("it's your " + ++counter + ". click!");
+//			}
+//		});
 
 		// even shorter: Lambda Expression
 		okButton.setOnAction(event -> {
-			System.out.println("Button clicked, Name = " + nameTextField.getText());
+			System.out.println("Button clicked, Name = " 
+					+ nameTextField.getText());
 		});
 
 		Scene scene = new Scene(p, 300, 200);

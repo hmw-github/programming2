@@ -1,7 +1,7 @@
 package chapter9.tablemanager;
 
 import javafx.application.Application;
-import chapter9.tablemanager.ui.TableManager;
+import chapter9.tablemanager.ui.TableManager2;
 
 /**
  * Start JavaFX application by calling launch with TableManager class...
@@ -9,6 +9,6 @@ import chapter9.tablemanager.ui.TableManager;
  */
 public class Main {
     public static void main(String[] args) {
-        Application.launch(TableManager.class, args);
+        Application.launch(TableManager2.class, args);
     }
 }

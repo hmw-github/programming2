@@ -44,7 +44,7 @@ import javafx.stage.Stage;
  *
  */
 public class MailDialog extends Application {
-	private boolean showLayout = false; // true: show layout
+	private boolean showLayout = true; // true: show layout
 
 	/*
 	 * Attributes
