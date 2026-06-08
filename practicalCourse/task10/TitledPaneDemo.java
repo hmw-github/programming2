@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class TitledPaneDemo extends Application {
 
 	public void start(Stage stage) {
-		TitledPane tp = new TitledPane("My Titled Pane", new Button("Button"));
+		TitledPane tp = new TitledPane();
 		//applying methods
 		tp.setText("My Titled Pane");
 		tp.setContent(new Button("Button"));

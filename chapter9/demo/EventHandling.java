@@ -1,5 +1,10 @@
 package chapter9.demo;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -52,14 +57,15 @@ public class EventHandling extends Application implements EventHandler<ActionEve
 		//okButton.setOnAction(new OKButtonEventHandler(nameTextField));
 
 		// or by using an anonymous class implementing the EventHandler interface:
-//		okButton.setOnAction(this);
-//		okButton.setOnAction(new EventHandler<ActionEvent>() {
-//			public void handle(ActionEvent event) {
-//				System.out.println("Button clicked, Name = " + nameTextField.getText());
-//				System.out.println("it's your " + ++counter + ". click!");
-//			}
-//		});
-
+		//okButton.setOnAction(this);
+		
+		okButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Button clicked, Name = " + nameTextField.getText());
+				System.out.println("it's your " + ++counter + ". click!");
+			}
+		});
+		
 		// even shorter: Lambda Expression
 		okButton.setOnAction(event -> {
 			System.out.println("Button clicked, Name = " 

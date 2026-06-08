@@ -13,14 +13,18 @@ public class ZweiFensterMitScenes extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Window 1 (amodal)");
 
+		// populate scene 1
 		Pane pane1 = new FlowPane();
 		Button wechseln1 = new Button("switch to Scene 2");
-		pane1.getChildren().add(wechseln1);
+		pane1.getChildren().add(wechseln1);		
 		Scene scene1 = new Scene(pane1, 300, 200);
+
+		// polpulate scene 2
 		Pane pane2 = new FlowPane();
 		Button wechseln2 = new Button("back to Scene 1");
 		pane2.getChildren().add(wechseln2);
 		Scene scene2 = new Scene(pane2, 300, 200);
+
 		primaryStage.setScene(scene1);
 		wechseln1.setOnAction(event -> primaryStage.setScene(scene2));
 		wechseln2.setOnAction(event -> primaryStage.setScene(scene1));
